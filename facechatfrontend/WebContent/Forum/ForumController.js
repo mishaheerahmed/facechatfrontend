@@ -1,19 +1,40 @@
-myapp.controller("ForumController",function($scope,$http)
-{
-	$scope.forum={forumId:23,forumName:"",username:"",forumContent:"",creationDate:"",likes:3,userid:"",status:"A"};
-	$http.get("http://localhost:8080/fcmiddleware/getAllForums")
-	.then(function(response)
+myapp.controller("forumController", function($scope, $http, $location)
 	{
-	$scope.forumdata=response.data;
-	});
+	function fetchAllforum()
+	{
+		console.log("Fetching all forums");
+		$http.get("http://localhost:8080/fcmiddleware/getAllForums")
+
+		.then(function(response) 
+		{
+			$scope.forumdata = response.data;
+			console.log("forum fetched");
+		});
+	};
 	
-	$scope.addForum=function()
+	fetchAllforum();
+	$scope.insertforum = function()
 	{
-		console.log('Entered into InsertForum');
-		$http.post('http://localhost:8080/fcmiddleware/insertForum',$scope.forum)
-		.then(function(response)
-				{
-				console.log('Successful Blog Entered');
-				});
-		}
+		console.log('Entered insert forum');
+		$http.post('http://localhost:8080/fcmiddleware/insertForum',
+				$scope.forum).then(fetchAllforum(), function(response) 
+		{
+			console.log("successful forum entered");
+			$scope.refresh();
+			$location.path("/forum")
+		});
+	};
+	$scope.deleteforum = function(forumId) 
+	{
+		console.log("entering in delete forum");
+		$http.get("http://localhost:8080/fcmiddleware/deleteForum/"+ forumId)
+				.success(fetchAllforum(), function(response)
+			{
+			console.log('successful deletion');
+			$scope.refresh();
+			$location.path("/forum");
+
+		});
+	};
+	
 });

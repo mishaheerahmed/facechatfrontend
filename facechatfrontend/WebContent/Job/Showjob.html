@@ -21,21 +21,15 @@ body
 			<tr class="success">
 				<td>Job Id</td>
 				<td>Job Profile</td>
-				<td>Job Description</td>
 				<td>Job Qualification</td>
-				<td>Job Salary</td>
 				<td>Job PoastedDate</td>
-				<td>Job LastDate</td>
 				<td colspan="2">Job Apply/Delete</td>
 			</tr>
 			<tr class="success" ng-repeat="job in jobList">
 				<td>{{job.jobId}}</td>
-				<td>{{job.jobProfile}}</td>
-				<td>{{job.jobDesc}}</td>                           	
-                <td>{{job.qualification}}</td>                         
-                <td>{{job.salary}}</td>                           	
-                <td>{{job.postedDate}}</td>                           
-                <td>{{job.lastDate}}</td> 
+				<td>{{job.status}}</td>                 	
+                <td>{{job.qualification}}</td>                                                    	
+                <td>{{job.postdate}}</td>                            
                 <td><a href="Job/applyjob.html"><input type="submit" class="btn btn-primary"  Value="Apply Job" ng-click="appllyJob(job.jobId)"/></a></td>
                 <td ng-show="currentUser.role=='ADMIN'"><input type="submit"  class="btn btn-danger" Value="Delet Job"  class="glyphicon glyphicon-trash" ng-click="deleteJob(job.jobId)"/></td>
 			</tr>

@@ -1,6 +1,6 @@
 myapp.controller("jobController", function($scope, $http, $location,$rootScope)
 		{
-	$scope.jobs=={jobId:0,jobProfile:'',jobDesc:'',qualification:'',salary:0,postedDate:'',lastDate:''};
+	$scope.jobs=={jobId:0,status:'',qualification:'',salary:0,postdate:''};
 	$scope.jobList;
 	
 $scope.insertjob=function()
